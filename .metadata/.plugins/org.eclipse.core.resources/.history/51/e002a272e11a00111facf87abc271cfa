@@ -1,0 +1,64 @@
+package com.mayurTech.user.service.services.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.mayurTech.user.service.controllers.UserController;
+import com.mayurTech.user.service.entites.User;
+import com.mayurTech.user.service.exception.ResourceNotFoundException;
+import com.mayurTech.user.service.repository.UserRepository;
+import com.mayurTech.user.service.services.UserService;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+	Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
+	private UserRepository userServiceRepository;
+
+	private RestTemplate restTemplate;
+
+	public UserServiceImpl(UserRepository userServiceRepository, RestTemplate restTemplate) {
+		this.userServiceRepository = userServiceRepository;
+		this.restTemplate = restTemplate;
+	}
+
+	@Override
+	public User saveUser(User user) {
+		// TODO Auto-generated method stub
+		String userId = UUID.randomUUID().toString();
+		user.setUserId(userId);
+		return userServiceRepository.save(user);
+
+	}
+
+	@Override
+	public List<User> getAllUser() {
+		// TODO Auto-generated method stub
+		return userServiceRepository.findAll();
+	}
+
+	@Override
+	public User getUser(String userId) {
+		// TODO Auto-generated method stub
+		System.out.println(userId);
+		User user1 = userServiceRepository.findById(userId)
+				.orElseThrow(() -> new ResourceNotFoundException("User with given id not server " + userId));
+
+		// Fetch reating details from below urls
+		// http://localhost:8083/ratings/getRatingByUsrId/12115da3-c5ee-4e80-9ecd-a628a3097064
+
+		ArrayList forObject = restTemplate.getForObject(
+				"http://localhost:8083/ratings/getRatingByUsrId/12115da3-c5ee-4e80-9ecd-a628a3097064", ArrayList.class);
+		logger.info("Rating object"+forObject);
+		return user1;
+	}
+
+}

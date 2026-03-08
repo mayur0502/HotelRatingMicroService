@@ -1,0 +1,5 @@
+package com.mayurTech.user.service.payload;
+
+public class ApiResponse {
+
+}

@@ -1,0 +1,18 @@
+package com.mayurTech.user.service.exception;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import com.mayurTech.user.service.payload.ApiResponse;
+
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+	@ExceptionHandler(Resou=)
+	public ResponseEntity<ApiResponse> handlerResourceNotFoundException(ResourceNotFoundException ex){
+		return null;
+		
+	}
+	
+}

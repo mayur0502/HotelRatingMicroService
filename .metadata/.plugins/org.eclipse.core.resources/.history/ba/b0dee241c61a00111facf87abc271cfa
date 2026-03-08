@@ -1,0 +1,5 @@
+package com.mayurTech.rating.service.services;
+
+public interface RatingService {
+
+}

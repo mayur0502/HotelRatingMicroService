@@ -1,0 +1,5 @@
+package com.mayurTech.hotel.service.repository;
+
+public interface HotelRepository {
+
+}

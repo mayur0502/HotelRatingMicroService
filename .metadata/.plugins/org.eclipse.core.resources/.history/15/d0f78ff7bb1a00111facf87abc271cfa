@@ -1,0 +1,9 @@
+package com.mayurTech.hotel.service.services;
+
+import com.mayurTech.hotel.service.entity.Hotel;
+
+public interface HotelService {
+
+	Hotel create(Hotel hotel);
+	
+}

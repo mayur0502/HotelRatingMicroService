@@ -1,0 +1,5 @@
+package com.mayurTech.user.service.repository;
+
+public interface UserRepository {
+
+}

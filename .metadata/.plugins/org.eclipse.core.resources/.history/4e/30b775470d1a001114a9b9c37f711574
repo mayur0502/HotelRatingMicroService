@@ -1,0 +1,8 @@
+package com.mayurTech.user.service.services;
+
+import com.mayurTech.user.service.entites.User;
+
+public interface UserService {
+
+	User saveUser(User user);
+}

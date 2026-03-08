@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<typeInfoHistroy>
+    <typeInfo handle="=HotelService/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.mayurTech.hotel.service.services{HotelService.java[HotelService" modifiers="513" timestamp="1772953038502"/>
+    <typeInfo handle="=RatingService/C:\/Users\/mayur\/.m2\/repository\/org\/springframework\/data\/spring-data-mongodb\/4.5.9\/spring-data-mongodb-4.5.9.jar=/maven.pomderived=/true=/=/maven.groupId=/org.springframework.data=/=/maven.artifactId=/spring-data-mongodb=/=/maven.version=/4.5.9=/=/maven.scope=/compile=/=/maven.pomderived=/true=/&lt;org.springframework.data.mongodb.repository(MongoRepository.class[MongoRepository" modifiers="1537" timestamp="1772887362956"/>
+    <typeInfo handle="=RatingService/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.mayurTech.rating.service.services{RatingService.java[RatingService" modifiers="513" timestamp="1772957505672"/>
+</typeInfoHistroy>

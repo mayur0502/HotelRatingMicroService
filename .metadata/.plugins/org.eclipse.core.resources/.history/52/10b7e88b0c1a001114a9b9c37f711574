@@ -1,0 +1,9 @@
+package com.mayurTech.user.service.entites;
+
+import jakarta.persistence.Entity;
+
+@Entity
+public class User {
+
+	
+}

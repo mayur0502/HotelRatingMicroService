@@ -1,0 +1,17 @@
+package com.mayurTech.hotel.service.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.mayurTech.hotel.service.services.HotelService;
+
+@RestController
+@RequestMapping("/hotels")
+public class HotelController {
+
+	@Autowired
+	HotelService hotelService;
+	
+	
+}

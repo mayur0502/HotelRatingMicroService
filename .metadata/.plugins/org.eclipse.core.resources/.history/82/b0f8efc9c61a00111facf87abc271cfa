@@ -1,0 +1,9 @@
+package com.mayurTech.rating.service.repository;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+import com.mayurTech.rating.service.entity.Rating;
+
+public interface RatingRepository extends MongoRepository<Rating, String> {
+
+}

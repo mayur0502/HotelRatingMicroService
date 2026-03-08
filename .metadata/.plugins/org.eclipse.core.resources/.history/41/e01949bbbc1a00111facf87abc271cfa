@@ -1,0 +1,9 @@
+package com.mayurTech.hotel.service.exception;
+
+public class ResourceNotFoundException extends RuntimeException {
+	
+	ResourceNotFoundException(){
+		
+	}
+
+}

@@ -1,0 +1,8 @@
+package com.mayurTech.user.service.external.services;
+
+import com.mayurTech.user.service.entites.Hotel;
+
+public class HotelServiceImpl implements HotelService {
+
+
+}

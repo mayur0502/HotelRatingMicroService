@@ -1,0 +1,8 @@
+package com.mayurTech.user.service.exception;
+
+class ResourceNotFoundException extends RuntimeException{
+
+	ResourceNotFoundException(){
+		super("Resource not found");
+	}
+}

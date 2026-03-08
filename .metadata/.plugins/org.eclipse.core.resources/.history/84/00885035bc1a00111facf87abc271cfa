@@ -1,0 +1,28 @@
+package com.mayurTech.hotel.service.services.impl;
+
+import java.util.List;
+
+import com.mayurTech.hotel.service.entity.Hotel;
+import com.mayurTech.hotel.service.services.HotelService;
+
+public class HotelServiceImpl implements HotelService {
+
+	@Override
+	public Hotel create(Hotel hotel) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Hotel> getAllHotel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Hotel getHotelById(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

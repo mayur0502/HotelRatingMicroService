@@ -1,0 +1,44 @@
+package com.mayurTech.rating.service.services.impl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.mayurTech.rating.service.entity.Rating;
+import com.mayurTech.rating.service.repository.RatingRepository;
+import com.mayurTech.rating.service.services.RatingService;
+
+@Service
+public class RatingServiceImpl implements RatingService {
+
+	private RatingRepository ratingRepository;
+	RatingServiceImpl(RatingRepository ratingRepository){
+		this.ratingRepository  = ratingRepository;
+	}
+	
+	@Override
+	public Rating createRating(Rating rating) {
+		// TODO Auto-generated method stub
+		return ratingRepository.save(rating);
+	}
+
+	@Override
+	public List<Rating> getAllRating() {
+		// TODO Auto-generated method stub
+		
+		return ratingRepository.findAll();
+	}
+
+	@Override
+	public List<Rating> getRatingByUsrId(String usrId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Rating> getRatingByHotelId(String hotelId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -1,0 +1,15 @@
+package com.mayurTech.rating.service.controller;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.mayurTech.rating.service.entity.Rating;
+
+@RestController
+@RequestMapping("ratings")
+public class RatingController {
+
+	public ResponseEntity<Rating> createRating(Rating rating);
+	
+}

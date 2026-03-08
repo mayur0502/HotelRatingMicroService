@@ -1,0 +1,5 @@
+1772968400109	Extract local variable 'forObject'
+1772970336775	Extract local variable 'all'
+1772986273397	Extract local variable 'collect'
+1772986428614	Extract local variable 'forObject'
+1772989910819	Delete element
