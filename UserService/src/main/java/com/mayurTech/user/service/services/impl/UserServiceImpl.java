@@ -18,6 +18,7 @@ import com.mayurTech.user.service.entites.Hotel;
 import com.mayurTech.user.service.entites.Rating;
 import com.mayurTech.user.service.exception.ResourceNotFoundException;
 import com.mayurTech.user.service.external.services.HotelService;
+import com.mayurTech.user.service.external.services.RatingService;
 import com.mayurTech.user.service.repository.UserRepository;
 import com.mayurTech.user.service.services.UserService;
 
@@ -30,11 +31,14 @@ public class UserServiceImpl implements UserService {
 
 	private RestTemplate restTemplate;
 	private HotelService hotelService;
+	private RatingService ratingService;
 
-	public UserServiceImpl(UserRepository userServiceRepository, RestTemplate restTemplate,HotelService hotelService) {
+	public UserServiceImpl(UserRepository userServiceRepository, RestTemplate restTemplate, HotelService hotelService,
+			RatingService ratingService) {
 		this.userServiceRepository = userServiceRepository;
 		this.restTemplate = restTemplate;
 		this.hotelService = hotelService;
+		this.ratingService = ratingService;
 	}
 
 	@Override
@@ -42,7 +46,17 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		String userId = UUID.randomUUID().toString();
 		user.setUserId(userId);
-		return userServiceRepository.save(user);
+		List<Rating> updatedRating = new ArrayList();
+		
+		List<Rating> rating = user.getRating();
+		for (Rating rating2 : rating) {
+			rating2.setUserId(userId);
+			Rating rating3 = ratingService.createRating(rating2);
+			updatedRating.add(rating3);
+		}
+		User save = userServiceRepository.save(user);
+		save.setRating(updatedRating);
+		return save;
 
 	}
 
@@ -51,7 +65,9 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		// Fetch Rating from different server
 		List<User> users = userServiceRepository.findAll();
-		Rating[] ratings = restTemplate.getForObject("http://RATINGSERVICE/ratings/getAllRatings", Rating[].class);
+//		Rating[] ratings = restTemplate.getForObject("http://RATINGSERVICE/ratings/getAllRatings", Rating[].class);
+
+		Rating[] ratings = ratingService.getAllRating();
 
 		List<Rating> ratingList = Arrays.asList(ratings);
 		users.forEach(user -> {
@@ -61,7 +77,7 @@ public class UserServiceImpl implements UserService {
 
 //				Hotel hotel = restTemplate
 //						.getForObject("http://HOTELSERVICE/hotels/getHotelById/" + rating.getHotelId(), Hotel.class);
-				
+
 				Hotel hotel = hotelService.getHotel(rating.getHotelId());
 
 				rating.setHotel(hotel);
@@ -85,8 +101,10 @@ public class UserServiceImpl implements UserService {
 		// Fetch reating details from below urls
 		// http://localhost:8083/ratings/getRatingByUsrId/12115da3-c5ee-4e80-9ecd-a628a3097064
 
-		Rating[] ratingArr = restTemplate
-				.getForObject("http://RATINGSERVICE/ratings/getRatingByUsrId/" + user1.getUserId(), Rating[].class);
+//		Rating[] ratingArr = restTemplate
+//				.getForObject("http://RATINGSERVICE/ratings/getRatingByUsrId/" + user1.getUserId(), Rating[].class);
+		Rating[] ratingArr = ratingService.getRatingsByUsrId(userId);
+
 		logger.info("Rating object" + ratingArr);
 		List<Rating> ratingsForUser = Arrays.asList(ratingArr);
 		List<Rating> ratingList = ratingsForUser.stream().map(rating -> {

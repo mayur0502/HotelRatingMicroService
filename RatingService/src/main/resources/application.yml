@@ -1,12 +1,13 @@
 server:
   port: 8083
-
+#mongodb+srv://root:root@cluster0.pxu2fvz.mongodb.net/?appName=Cluster0
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/
+#      uri: mongodb://localhost:27017/
+#      database: microservices
+      uri: mongodb+srv://root:root@cluster0.pxu2fvz.mongodb.net/?appName=Cluster0
       database: microservices
-
 eureka:
   instance:
     prefer-ip-address: true

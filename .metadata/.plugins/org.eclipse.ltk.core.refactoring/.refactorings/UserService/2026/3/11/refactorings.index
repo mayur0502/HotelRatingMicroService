@@ -3,3 +3,5 @@
 1772986273397	Extract local variable 'collect'
 1772986428614	Extract local variable 'forObject'
 1772989910819	Delete element
+1773075259653	Extract local variable 'rating3'
+1773075428191	Extract local variable 'save'
