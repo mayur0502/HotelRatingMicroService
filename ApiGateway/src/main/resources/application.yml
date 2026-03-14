@@ -7,28 +7,32 @@ spring:
 
   cloud:
     gateway:
-      routes:
-        - id: USERSERVICE
-          uri: lb://USERSERVICE
-          predicates:
-            - Path=/users/**
+      server:
+        webflux:
+          routes:
+            - id: USERSERVICE
+              uri: lb://USERSERVICE
+              predicates:
+                - Path=/users/**
 
-        - id: RATINGSERVICE
-          uri: lb://RATINGSERVICE
-          predicates:
-            - Path=/ratings/**
+            - id: RATINGSERVICE
+              uri: lb://RATINGSERVICE
+              predicates:
+                - Path=/ratings/**
 
-        - id: HOTELSERVICE
-          uri: lb://HOTELSERVICE
-          predicates:
-            - Path=/hotels/**
+            - id: HOTELSERVICE
+              uri: lb://HOTELSERVICE
+              predicates:
+                - Path=/hotels/**
 
-eureka:
-  instance:
-    prefer-ip-address: true
+  config:
+    import: optional:configserver:http://localhost:8087
 
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+#eureka:
+#  instance:
+#    prefer-ip-address: true
+#  client:
+#    fetch-registry: true
+#    register-with-eureka: true
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka

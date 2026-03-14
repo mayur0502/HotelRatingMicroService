@@ -8,6 +8,10 @@ spring:
 #      database: microservices
       uri: mongodb+srv://root:root@cluster0.pxu2fvz.mongodb.net/?appName=Cluster0
       database: microservices
+  application:
+    name: RatingService
+  config:
+    import: optional:configserver:http://localhost:8087
 eureka:
   instance:
     prefer-ip-address: true

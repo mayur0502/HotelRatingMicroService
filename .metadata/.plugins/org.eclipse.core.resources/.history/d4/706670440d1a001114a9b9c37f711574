@@ -1,5 +1,0 @@
-package com.mayurTech.user.service.services;
-
-public interface UserService {
-
-}
