@@ -6,6 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,8 @@ import org.springframework.web.client.RestTemplate;
 
 import com.mayurTech.user.service.entites.User;
 import com.mayurTech.user.service.services.UserService;
+
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 @RestController
 @RequestMapping("/users")
@@ -43,10 +46,14 @@ public class UserController {
 		User user1 = userService.getUser(userId);
 		return ResponseEntity.ok(user1);
 	}
+	
+
 
 	@GetMapping("/getAllUser")
 	public ResponseEntity<List<User>> getAlUser() {
 		List<User> user1 = userService.getAllUser();
 		return ResponseEntity.ok(user1);
 	}
+	
+
 }

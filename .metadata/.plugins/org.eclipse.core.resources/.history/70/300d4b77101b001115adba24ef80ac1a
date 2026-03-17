@@ -1,5 +1,0 @@
-package com.mayurTech.user.service.external.services;
-
-public interface HotelService {
-
-}

@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,6 +23,10 @@ import com.mayurTech.user.service.external.services.HotelService;
 import com.mayurTech.user.service.external.services.RatingService;
 import com.mayurTech.user.service.repository.UserRepository;
 import com.mayurTech.user.service.services.UserService;
+
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.github.resilience4j.retry.annotation.Retry;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -47,7 +53,7 @@ public class UserServiceImpl implements UserService {
 		String userId = UUID.randomUUID().toString();
 		user.setUserId(userId);
 		List<Rating> updatedRating = new ArrayList();
-		
+
 		List<Rating> rating = user.getRating();
 		for (Rating rating2 : rating) {
 			rating2.setUserId(userId);
@@ -60,6 +66,7 @@ public class UserServiceImpl implements UserService {
 
 	}
 
+	@CircuitBreaker(name = "getAllUserRatingHotelBreaker", fallbackMethod = "getAllUserFallback")
 	@Override
 	public List<User> getAllUser() {
 		// TODO Auto-generated method stub
@@ -91,10 +98,28 @@ public class UserServiceImpl implements UserService {
 		return users;
 	}
 
+	// creating fallback method for circuit breaker
+
+	public List<User> getAllUserFallback(Exception ex) {
+		List<User> user = new ArrayList<User>();
+
+		User users = User.builder().email("dummy@dummy.com").name("Dummy")
+				.about("This is fallback method to handle fallback torance").userId(null).build();
+		user.add(users);
+		return user;
+	}
+
+	int retryCount = 1;
+//	@CircuitBreaker(name = "ratingHotelBreaker", fallbackMethod = "ratingHotelFallback")
+//	@Retry(name ="ratingHotelBreaker",fallbackMethod = "ratingHotelFallback")
+
+	@RateLimiter(name = "ratingHotelRateLimiter", fallbackMethod = "ratingHotelFallback")
 	@Override
 	public User getUser(String userId) {
 		// TODO Auto-generated method stub
 		System.out.println(userId);
+		System.out.println("Retry attempt :: " + retryCount);
+		retryCount++;
 		User user1 = userServiceRepository.findById(userId)
 				.orElseThrow(() -> new ResourceNotFoundException("User with given id not server " + userId));
 
@@ -123,6 +148,14 @@ public class UserServiceImpl implements UserService {
 
 		user1.setRating(ratingList);
 		return user1;
+	}
+	// creating fallback method for circuit breaker
+
+	public User ratingHotelFallback(String userId, Exception ex) {
+		logger.info("Fallback occured beacuase service is down" + ex.getMessage());
+		User user = User.builder().email("mayur@mayurtech.in").name("dummy")
+				.about("This user is created beacuse some service is down").userId("12345").build();
+		return user;
 	}
 
 }
