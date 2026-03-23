@@ -10,21 +10,21 @@
 		<item key="isRegEx" value="false"/>
 		<item key="selection" value=""/>
 		<list key="findhistory">
+			<item value="employee"/>
+			<item value="emplo"/>
+			<item value="jpa"/>
+			<item value="lombok"/>
+			<item value="ratingHotelBreaker"/>
+			<item value="my"/>
+			<item value="dev"/>
+			<item value="clod"/>
+			<item value="cloud"/>
 			<item value="PreHandler"/>
 			<item value="ratingHotelFallback"/>
 			<item value="retry"/>
 			<item value="getAllUserFallback"/>
-			<item value="ratingHotelBreaker"/>
 			<item value="aop"/>
 			<item value="config"/>
-			<item value="mysw"/>
-			<item value="api"/>
-			<item value="gateway"/>
-			<item value="8083"/>
-			<item value="proper"/>
-			<item value="manae"/>
-			<item value="client"/>
-			<item value="devtoo"/>
 		</list>
 		<list key="replacehistory">
 		</list>

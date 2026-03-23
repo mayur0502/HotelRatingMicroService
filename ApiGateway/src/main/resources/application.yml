@@ -3,27 +3,30 @@ server:
 
 spring:
   application:
-    name: API-GATEWAY
+    name: api-gateway
 
   cloud:
     gateway:
-      server:
-        webflux:
-          routes:
-            - id: USERSERVICE
-              uri: lb://USERSERVICE
-              predicates:
-                - Path=/users/**
+      routes:
+        - id: user-service
+          uri: lb://USERSERVICE
+          predicates:
+            - Path=/users/**
 
-            - id: RATINGSERVICE
-              uri: lb://RATINGSERVICE
-              predicates:
-                - Path=/ratings/**
+        - id: rating-service
+          uri: lb://RATINGSERVICE
+          predicates:
+            - Path=/ratings/**
 
-            - id: HOTELSERVICE
-              uri: lb://HOTELSERVICE
-              predicates:
-                - Path=/hotels/**
+        - id: hotel-service
+          uri: lb://HOTELSERVICE
+          predicates:
+            - Path=/hotels/**
+
+        - id: auth-service
+          uri: lb://AUTHSERVICE
+          predicates:
+            - Path=/auth/**
 
   config:
     import: optional:configserver:http://localhost:8087

@@ -9,6 +9,33 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 class Main {
+    // Reverse using StringBuilder (fast and simple)
+    public static String reverseWithStringBuilder(String s) {
+        if (s == null) return null;
+        return new StringBuilder(s).reverse().toString();
+    }
+
+    // Reverse iteratively by swapping characters (in-place on char array)
+    public static String reverseIterative(String s) {
+        if (s == null) return null;
+        char[] arr = s.toCharArray();
+        int i = 0, j = arr.length - 1;
+        while (i < j) {
+            char tmp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = tmp;
+            i++; j--;
+        }
+        return new String(arr);
+    }
+
+    // Reverse recursively
+    public static String reverseRecursive(String s) {
+        if (s == null) return null;
+        if (s.length() <= 1) return s;
+        return reverseRecursive(s.substring(1)) + s.charAt(0);
+    }
+
     public static void main(String[] args) {    
 //        String[] arr = {"cat","dog","tacs","god","bird"};
 //
@@ -101,11 +128,11 @@ class Main {
 //    String Domainname = strArr[1];
 //    String extension = strArr[2];
 //    String firstName = name.charAt(0) +  name.substring(1, name.length()-1).chars()
-//    					.mapToObj(c -> "*").collect(Collectors.joining())+ 
-//    					name.charAt(name.length()-1)+"@"+Domainname.charAt(0)+
-//    					Domainname.substring(1,Domainname.length()) .
-//    					chars().mapToObj(s->"*").collect(Collectors.joining())
-//    					+"."+extension;
+//					.mapToObj(c -> "*").collect(Collectors.joining())+ 
+//					name.charAt(name.length()-1)+"@"+Domainname.charAt(0)+
+//					Domainname.substring(1,Domainname.length()) .
+//					chars().mapToObj(s->"*").collect(Collectors.joining())
+//					+"."+extension;
 //    
 //    System.out.println(firstName);
 //    
@@ -155,4 +182,19 @@ class Main {
     			s,LinkedHashMap::new,	Collectors.counting())).
     			entrySet().stream().
     			filter(e-> e.getValue() ==1).findFirst().orElse(null);
-}} 
+    	
+    	System.out.println("First non-repeated char entry in '"+disStr+"' = " + first);
+    	
+    	// Demonstrate the three reversal methods
+    	String sample = "Hello, World!";
+    	System.out.println("Original: " + sample);
+    	System.out.println("reverseWithStringBuilder: " + reverseWithStringBuilder(sample));
+    	System.out.println("reverseIterative: " + reverseIterative(sample));
+    	System.out.println("reverseRecursive: " + reverseRecursive(sample));
+    	
+    	// Quick edge-case checks
+    	System.out.println("Empty string -> '" + reverseWithStringBuilder("") + "'");
+    	System.out.println("Null -> " + reverseWithStringBuilder(null));
+    	
+    	}
+}
